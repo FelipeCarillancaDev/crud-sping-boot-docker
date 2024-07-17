@@ -41,7 +41,11 @@ public class BookRepository {
 
     public Book getBookById(long id) {
         String sql = "select * from " + table + " where id = :id";
-        return jdbcTemplate.queryForObject(sql, new MapSqlParameterSource("id", id), bookMapper);
+        try {
+            return jdbcTemplate.queryForObject(sql, new MapSqlParameterSource("id", id), bookMapper);
+        }catch (Exception e) {
+            return null;
+        }
     }
 
     public void deleteBook(Long id) {
