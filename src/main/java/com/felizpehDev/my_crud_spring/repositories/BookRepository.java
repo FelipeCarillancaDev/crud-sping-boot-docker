@@ -29,7 +29,7 @@ public class BookRepository {
     }
 
     public List<Book> getAllBooks() {
-        String sql = "select * from " + table; ;
+        String sql = "select * from " + table;
         return jdbcTemplate.query(sql, bookMapper);
     }
 
@@ -37,6 +37,11 @@ public class BookRepository {
         return insert.executeAndReturnKey(
                 new MapSqlParameterSource("name", newBook.name)
         ).longValue();
+    }
+
+    public Book getBookById(long id) {
+        String sql = "select * from " + table + " where id = :id";
+        return jdbcTemplate.queryForObject(sql, new MapSqlParameterSource("id", id), bookMapper);
     }
 
     private static class BookMapper  implements RowMapper<Book> {

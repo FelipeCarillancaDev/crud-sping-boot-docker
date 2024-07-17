@@ -22,4 +22,8 @@ public class BookService {
     public long createBook(Book newBook) {
         return bookRepository.createBook(newBook);
     }
+
+    public Book getBookById(long id) {
+        return bookRepository.getBookById(id);
+    }
 }
