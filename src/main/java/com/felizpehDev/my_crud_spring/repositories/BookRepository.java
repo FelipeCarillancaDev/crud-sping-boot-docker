@@ -44,6 +44,11 @@ public class BookRepository {
         return jdbcTemplate.queryForObject(sql, new MapSqlParameterSource("id", id), bookMapper);
     }
 
+    public void deleteBook(Long id) {
+        String sql = "delete from " + table + " where id = :id";
+        jdbcTemplate.update(sql, new MapSqlParameterSource("id", id));
+    }
+
     private static class BookMapper  implements RowMapper<Book> {
 
         @Override
